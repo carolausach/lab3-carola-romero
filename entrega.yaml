@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ns-carola-romero
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: config-carola-romero
+  namespace: ns-carola-romero
+data:
+  AMBIENTE: "produccion"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: secret-carola-romero
+  namespace: ns-carola-romero
+type: Opaque
+stringData:
+  API_KEY: "carola-k8s-key"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-carola-romero
+  namespace: ns-carola-romero
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: app-carola-romero
+  template:
+    metadata:
+      labels:
+        app: app-carola-romero
+    spec:
+      containers:
+        - name: app-carola-romero
+          image: carolaromero/lab3-carola-romero:carola-romero
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          env:
+            - name: AMBIENTE
+              valueFrom:
+                configMapKeyRef:
+                  name: config-carola-romero
+                  key: AMBIENTE
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secret-carola-romero
+                  key: API_KEY
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-carola-romero
+  namespace: ns-carola-romero
+spec:
+  selector:
+    app: app-carola-romero
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 3000
+  type: ClusterIP
