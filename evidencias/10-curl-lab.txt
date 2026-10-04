@@ -1,0 +1,1 @@
+{"AMBIENTE":"produccion","API_KEY":"carola-k8s-key"}

@@ -1,0 +1,3 @@
+NAME                                 READY   STATUS    RESTARTS   AGE
+app-carola-romero-5f7b996cc9-gq2ss   1/1     Running   0          7m45s
+app-carola-romero-5f7b996cc9-nnbgb   1/1     Running   0          7m28s

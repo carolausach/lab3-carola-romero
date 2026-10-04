@@ -1,0 +1,2 @@
+NAME                TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+svc-carola-romero   ClusterIP   10.106.3.15   <none>        80/TCP    105m

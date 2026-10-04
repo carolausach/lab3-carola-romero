@@ -1,0 +1,612 @@
+Started by user Carola Romero
+Obtained Jenkinsfile from git https://github.com/carolausach/lab3-carola-romero.git
+[Pipeline] Start of Pipeline
+[Pipeline] readTrusted
+Obtained agent.yaml from git https://github.com/carolausach/lab3-carola-romero.git
+[Pipeline] podTemplate
+[Pipeline] {
+[Pipeline] node
+[PodInfo] jenkins/lab3-carola-romero-2-w8pq0-x0gkr-f2z8f
+	Container [dind] waiting [ContainerCreating] No message
+	Container [docker] waiting [ContainerCreating] No message
+	Container [jnlp] waiting [ContainerCreating] No message
+	Container [kubectl] waiting [ContainerCreating] No message
+	Container [node] waiting [ContainerCreating] No message
+	Pod [Pending][ContainersNotReady] containers with unready status: [node docker dind kubectl jnlp]
+Created Pod: kubernetes jenkins/lab3-carola-romero-2-w8pq0-x0gkr-f2z8f
+[PodInfo] jenkins/lab3-carola-romero-2-w8pq0-x0gkr-f2z8f
+	Container [dind] waiting [ContainerCreating] No message
+	Container [docker] waiting [ContainerCreating] No message
+	Container [jnlp] waiting [ContainerCreating] No message
+	Container [kubectl] waiting [ContainerCreating] No message
+	Container [node] waiting [ContainerCreating] No message
+	Pod [Pending][ContainersNotReady] containers with unready status: [node docker dind kubectl jnlp]
+Still waiting to schedule task
+‘lab3-carola-romero-2-w8pq0-x0gkr-f2z8f’ is offline
+Agent lab3-carola-romero-2-w8pq0-x0gkr-f2z8f is provisioned from template lab3-carola-romero_2-w8pq0-x0gkr
+---
+apiVersion: "v1"
+kind: "Pod"
+metadata:
+  annotations:
+    kubernetes.jenkins.io/last-refresh: "1791083148740"
+    buildUrl: "http://jenkins.jenkins.svc.cluster.local:8080/job/lab3-carola-romero/2/"
+    runUrl: "job/lab3-carola-romero/2/"
+  labels:
+    jenkins: "slave"
+    jenkins/label-digest: "8da17a15472bd905e74d8f2d5e359fbee5363cf3"
+    jenkins/label: "lab3-carola-romero_2-w8pq0"
+    kubernetes.jenkins.io/controller: "http___jenkins_jenkins_svc_cluster_local_8080x"
+  name: "lab3-carola-romero-2-w8pq0-x0gkr-f2z8f"
+  namespace: "jenkins"
+spec:
+  containers:
+  - command:
+    - "cat"
+    image: "node:24-alpine"
+    name: "node"
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - command:
+    - "cat"
+    env:
+    - name: "DOCKER_HOST"
+      value: "tcp://localhost:2375"
+    image: "docker:29-cli"
+    name: "docker"
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - args:
+    - "--host=tcp://0.0.0.0:2375"
+    - "--host=unix:///var/run/docker.sock"
+    env:
+    - name: "DOCKER_TLS_CERTDIR"
+      value: ""
+    image: "docker:29-dind"
+    name: "dind"
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - command:
+    - "cat"
+    image: "alpine/k8s:1.36.1"
+    name: "kubectl"
+    tty: true
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  - env:
+    - name: "JENKINS_SECRET"
+      value: "********"
+    - name: "JENKINS_TUNNEL"
+      value: "jenkins.jenkins.svc.cluster.local:50000"
+    - name: "JENKINS_AGENT_NAME"
+      value: "lab3-carola-romero-2-w8pq0-x0gkr-f2z8f"
+    - name: "REMOTING_OPTS"
+      value: "-noReconnectAfter 1d"
+    - name: "JENKINS_NAME"
+      value: "lab3-carola-romero-2-w8pq0-x0gkr-f2z8f"
+    - name: "JENKINS_AGENT_WORKDIR"
+      value: "/home/jenkins/agent"
+    - name: "JENKINS_URL"
+      value: "http://jenkins.jenkins.svc.cluster.local:8080/"
+    image: "jenkins/inbound-agent:3391.va_37fa_a_305d6d-1-jdk25"
+    name: "jnlp"
+    resources:
+      requests:
+        memory: "256Mi"
+        cpu: "100m"
+    volumeMounts:
+    - mountPath: "/home/jenkins/agent"
+      name: "workspace-volume"
+      readOnly: false
+  nodeSelector:
+    kubernetes.io/os: "linux"
+  restartPolicy: "Never"
+  serviceAccountName: "jenkins"
+  volumes:
+  - emptyDir:
+      medium: ""
+    name: "workspace-volume"
+
+Running on lab3-carola-romero-2-w8pq0-x0gkr-f2z8f in /home/jenkins/agent/workspace/lab3-carola-romero
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning repository https://github.com/carolausach/lab3-carola-romero.git
+ > git init /home/jenkins/agent/workspace/lab3-carola-romero # timeout=10
+Fetching upstream changes from https://github.com/carolausach/lab3-carola-romero.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.47.3'
+ > git fetch --tags --force --progress -- https://github.com/carolausach/lab3-carola-romero.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision 539329618436029346d9b2e1631e6a5d2280ffc4 (refs/remotes/origin/main)
+ > git config remote.origin.url https://github.com/carolausach/lab3-carola-romero.git # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 539329618436029346d9b2e1631e6a5d2280ffc4 # timeout=10
+Commit message: "Corrige contenedor kubectl del agente Jenkins"
+ > git rev-list --no-walk c5b691f11684eadc8f29099e40434713c1f625ab # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Install)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ corepack enable
++ corepack prepare pnpm@9.15.4 --activate
+Preparing pnpm@9.15.4 for immediate activation...
++ pnpm install --frozen-lockfile
+(node:43) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+Lockfile is up to date, resolution step is skipped
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Packages: +643
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 643, reused 0, downloaded 168, added 167
+Progress: resolved 643, reused 0, downloaded 326, added 323
+Progress: resolved 643, reused 0, downloaded 594, added 594
+Progress: resolved 643, reused 0, downloaded 643, added 643, done
+.../node_modules/unrs-resolver postinstall$ node postinstall.js
+.../node_modules/@nestjs/core postinstall$ opencollective || exit 0
+.../node_modules/unrs-resolver postinstall: Done
+.../node_modules/@nestjs/core postinstall: Done
+
+dependencies:
++ @nestjs/common 11.1.24
++ @nestjs/core 11.1.24
++ @nestjs/platform-express 11.1.24
++ reflect-metadata 0.2.2
++ rxjs 7.8.2
+
+devDependencies:
++ @eslint/eslintrc 3.3.5
++ @eslint/js 9.39.4
++ @nestjs/cli 11.0.21
++ @nestjs/schematics 11.1.0
++ @nestjs/testing 11.1.24
++ @types/express 5.0.6
++ @types/jest 30.0.0
++ @types/node 24.12.4
++ @types/supertest 7.2.0
++ eslint 9.39.4
++ eslint-config-prettier 10.1.8
++ eslint-plugin-prettier 5.5.6
++ globals 17.6.0
++ jest 30.4.2
++ prettier 3.8.3
++ source-map-support 0.5.21
++ supertest 7.2.2
++ ts-jest 29.4.11
++ ts-loader 9.6.0
++ ts-node 10.9.2
++ tsconfig-paths 4.2.0
++ typescript 5.9.3
++ typescript-eslint 8.60.0
+
+Done in 4.1s
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Test)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ pnpm test -- --runInBand
+
+> lab3@0.0.1 test /home/jenkins/agent/workspace/lab3-carola-romero
+> jest "--runInBand"
+
+PASS src/env-config.spec.ts
+PASS src/app.controller.spec.ts
+
+Test Suites: 2 passed, 2 total
+Tests:       5 passed, 5 total
+Snapshots:   0 total
+Time:        0.607 s
+Ran all test suites.
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ pnpm build
+
+> lab3@0.0.1 build /home/jenkins/agent/workspace/lab3-carola-romero
+> nest build
+
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $DOCKERHUB_TOKEN
+[Pipeline] {
+[Pipeline] sh
++ docker info
++ + echodocker **** login
+ -u carolaromero --password-stdin
+
+WARNING! Your credentials are stored unencrypted in '/root/.docker/config.json'.
+Configure a credential helper to remove this warning. See
+https://docs.docker.com/go/credential-store/
+
+Login Succeeded
++ docker build -t carolaromero/lab3-carola-romero:carola-romero -t carolaromero/lab3-carola-romero:3.0.0 .
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 297B done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:24-alpine
+#2 ...
+
+#3 [auth] library/node:pull token for registry-1.docker.io
+#3 DONE 0.0s
+
+#2 [internal] load metadata for docker.io/library/node:24-alpine
+#2 DONE 1.5s
+
+#4 [internal] load .dockerignore
+#4 transferring context: 121B done
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 225.73kB done
+#5 DONE 0.0s
+
+#6 [1/7] FROM docker.io/library/node:24-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1
+#6 resolve docker.io/library/node:24-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1 done
+#6 sha256:e2f4a003057d235ec28208b606f2f9524400c06882b1ffa1c89ceda8213f5fb4 444B / 444B 0.1s done
+#6 sha256:d4a23e25aa718dc5c16fb5935f8683eff024fd67902ef1a4929a42da78d4e9d6 0B / 1.26MB 0.3s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 0B / 56.60MB 0.2s
+#6 sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a6393c00f00 0B / 4.19MB 0.2s
+#6 sha256:d4a23e25aa718dc5c16fb5935f8683eff024fd67902ef1a4929a42da78d4e9d6 1.26MB / 1.26MB 0.4s done
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 8.39MB / 56.60MB 0.6s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 14.68MB / 56.60MB 0.8s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 19.92MB / 56.60MB 0.9s
+#6 sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a6393c00f00 2.10MB / 4.19MB 0.8s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 26.21MB / 56.60MB 1.1s
+#6 sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a6393c00f00 4.19MB / 4.19MB 0.9s done
+#6 extracting sha256:a9986cd6f37dbddae7862a6d4be71683472e7c2ea708e87db14f8a6393c00f00 0.1s done
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 31.46MB / 56.60MB 1.2s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 35.65MB / 56.60MB 1.4s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 42.99MB / 56.60MB 1.5s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 51.38MB / 56.60MB 1.7s
+#6 sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 56.60MB / 56.60MB 1.8s done
+#6 extracting sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c
+#6 extracting sha256:6680b19ad074d7cbe6bf0eb4013d64483980d5cc93bf6774d7effd8bb196df0c 0.7s done
+#6 DONE 2.5s
+
+#6 [1/7] FROM docker.io/library/node:24-alpine@sha256:ebfe2f90462722a7a4de65e91990e97fe0d401c70e0e762c5b53302f905ec1c1
+#6 extracting sha256:d4a23e25aa718dc5c16fb5935f8683eff024fd67902ef1a4929a42da78d4e9d6 0.0s done
+#6 extracting sha256:e2f4a003057d235ec28208b606f2f9524400c06882b1ffa1c89ceda8213f5fb4 done
+#6 DONE 2.5s
+
+#7 [2/7] WORKDIR /app
+#7 DONE 0.2s
+
+#8 [3/7] RUN corepack enable
+#8 DONE 0.2s
+
+#9 [4/7] COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+#9 DONE 0.0s
+
+#10 [5/7] RUN corepack prepare pnpm@9.15.4 --activate && pnpm install --frozen-lockfile
+#10 0.117 Preparing pnpm@9.15.4 for immediate activation...
+#10 1.167 (node:1) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+#10 1.167 (Use `node --trace-deprecation ...` to show where the warning was created)
+#10 1.197 Lockfile is up to date, resolution step is skipped
+#10 1.227 Progress: resolved 1, reused 0, downloaded 0, added 0
+#10 1.350 Packages: +643
+#10 1.350 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+#10 1.965 
+#10 1.965    ╭──────────────────────────────────────────────────────────────────╮
+#10 1.965    │                                                                  │
+#10 1.965    │                Update available! 9.15.4 → 12.9.1.                │
+#10 1.965    │   Changelog: https://github.com/pnpm/pnpm/releases/tag/v12.9.1   │
+#10 1.965    │         Run "corepack install -g pnpm@12.9.1" to update.         │
+#10 1.965    │                                                                  │
+#10 1.965    ╰──────────────────────────────────────────────────────────────────╯
+#10 1.965 
+#10 2.241 Progress: resolved 643, reused 0, downloaded 146, added 141
+#10 3.240 Progress: resolved 643, reused 0, downloaded 352, added 352
+#10 4.249 Progress: resolved 643, reused 0, downloaded 579, added 578
+#10 4.712 Progress: resolved 643, reused 0, downloaded 643, added 643, done
+#10 5.065 .../node_modules/@nestjs/core postinstall$ opencollective || exit 0
+#10 5.065 .../node_modules/unrs-resolver postinstall$ node postinstall.js
+#10 5.197 .../node_modules/unrs-resolver postinstall: Done
+#10 5.961 .../node_modules/@nestjs/core postinstall:                            Thanks for installing nest 
+#10 5.964 .../node_modules/@nestjs/core postinstall:                  Please consider donating to our open collective
+#10 5.964 .../node_modules/@nestjs/core postinstall:                         to help us maintain this package.
+#10 5.964 .../node_modules/@nestjs/core postinstall:                                          
+#10 5.964 .../node_modules/@nestjs/core postinstall:                         Number of contributors: undefined
+#10 5.964 .../node_modules/@nestjs/core postinstall:                              Number of backers: 1220
+#10 5.993 .../node_modules/@nestjs/core postinstall:                              Annual budget: $121,852
+#10 5.993 .../node_modules/@nestjs/core postinstall:                              Current balance: $21,004
+#10 5.994 .../node_modules/@nestjs/core postinstall:                                          
+#10 5.994 .../node_modules/@nestjs/core postinstall:              Become a partner: https://opencollective.com/nest/donate
+#10 5.994 .../node_modules/@nestjs/core postinstall:                                          
+#10 6.110 .../node_modules/@nestjs/core postinstall: Done
+#10 6.380 
+#10 6.380 dependencies:
+#10 6.380 + @nestjs/common 11.1.24
+#10 6.380 + @nestjs/core 11.1.24
+#10 6.380 + @nestjs/platform-express 11.1.24
+#10 6.380 + reflect-metadata 0.2.2
+#10 6.380 + rxjs 7.8.2
+#10 6.380 
+#10 6.380 devDependencies:
+#10 6.380 + @eslint/eslintrc 3.3.5
+#10 6.380 + @eslint/js 9.39.4
+#10 6.380 + @nestjs/cli 11.0.21
+#10 6.380 + @nestjs/schematics 11.1.0
+#10 6.380 + @nestjs/testing 11.1.24
+#10 6.380 + @types/express 5.0.6
+#10 6.380 + @types/jest 30.0.0
+#10 6.380 + @types/node 24.12.4
+#10 6.380 + @types/supertest 7.2.0
+#10 6.380 + eslint 9.39.4
+#10 6.380 + eslint-config-prettier 10.1.8
+#10 6.380 + eslint-plugin-prettier 5.5.6
+#10 6.380 + globals 17.6.0
+#10 6.380 + jest 30.4.2
+#10 6.380 + prettier 3.8.3
+#10 6.380 + source-map-support 0.5.21
+#10 6.380 + supertest 7.2.2
+#10 6.380 + ts-jest 29.4.11
+#10 6.380 + ts-loader 9.6.0
+#10 6.380 + ts-node 10.9.2
+#10 6.380 + tsconfig-paths 4.2.0
+#10 6.380 + typescript 5.9.3
+#10 6.380 + typescript-eslint 8.60.0
+#10 6.380 
+#10 6.392 Done in 5.5s
+#10 DONE 6.6s
+
+#11 [6/7] COPY . .
+#11 DONE 0.2s
+
+#12 [7/7] RUN pnpm build
+#12 0.454 
+#12 0.454 > lab3@0.0.1 build /app
+#12 0.454 > nest build
+#12 0.454 
+#12 DONE 2.6s
+
+#13 exporting to image
+#13 exporting layers
+#13 exporting layers 5.6s done
+#13 exporting manifest sha256:84cf99361fb16a04af94177e1d7f285274ae8cb6530f02b764fe5984e08be2fe done
+#13 exporting config sha256:101e72fec6e792dbc99f0bacf7e37bb8414e5303663110f796e0333b556b7423 done
+#13 exporting attestation manifest sha256:751bb9588d524de5585e41a06ba01fe59351cd626a58e0eceb66991d8317d464 done
+#13 exporting manifest list sha256:6b56510e5e0609839e4d92165291b034d8d5af2018ad9a95e6f95243d5c19666 done
+#13 naming to docker.io/carolaromero/lab3-carola-romero:carola-romero done
+#13 unpacking to docker.io/carolaromero/lab3-carola-romero:carola-romero
+#13 unpacking to docker.io/carolaromero/lab3-carola-romero:carola-romero 4.1s done
+#13 naming to docker.io/carolaromero/lab3-carola-romero:3.0.0 done
+#13 unpacking to docker.io/carolaromero/lab3-carola-romero:3.0.0 done
+#13 DONE 9.8s
+WARNING: current commit information was not captured by the build: failed to read current commit information with git rev-parse --is-inside-work-tree
++ docker push carolaromero/lab3-carola-romero:carola-romero
+The push refers to repository [docker.io/carolaromero/lab3-carola-romero]
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+6680b19ad074: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+d4a23e25aa71: Waiting
+e2f4a003057d: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Already exists
+a9986cd6f37d: Layer already exists
+d4a23e25aa71: Layer already exists
+e2f4a003057d: Layer already exists
+1930c2672538: Waiting
+6680b19ad074: Layer already exists
+771ac484c12b: Waiting
+62d5df8c29d0: Waiting
+1930c2672538: Waiting
+771ac484c12b: Waiting
+62d5df8c29d0: Waiting
+771ac484c12b: Waiting
+62d5df8c29d0: Waiting
+1930c2672538: Waiting
+1930c2672538: Waiting
+cae2093fe144: Pushed
+ff37fb80e803: Waiting
+f3781991ff1e: Waiting
+ff37fb80e803: Waiting
+f3781991ff1e: Waiting
+ff37fb80e803: Waiting
+f3781991ff1e: Waiting
+ff37fb80e803: Waiting
+f3781991ff1e: Waiting
+64da2521a25d: Waiting
+771ac484c12b: Pushed
+62d5df8c29d0: Pushed
+64da2521a25d: Waiting
+64da2521a25d: Waiting
+64da2521a25d: Waiting
+1930c2672538: Pushed
+ff37fb80e803: Pushed
+64da2521a25d: Pushed
+f3781991ff1e: Pushed
+carola-romero: digest: sha256:6b56510e5e0609839e4d92165291b034d8d5af2018ad9a95e6f95243d5c19666 size: 856
++ docker push carolaromero/lab3-carola-romero:3.0.0
+The push refers to repository [docker.io/carolaromero/lab3-carola-romero]
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+6680b19ad074: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+6680b19ad074: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+6680b19ad074: Waiting
+cae2093fe144: Waiting
+44136fa355b3: Waiting
+e2f4a003057d: Waiting
+d4a23e25aa71: Waiting
+6680b19ad074: Layer already exists
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+cae2093fe144: Waiting
+a9986cd6f37d: Waiting
+44136fa355b3: Waiting
+e2f4a003057d: Waiting
+d4a23e25aa71: Waiting
+771ac484c12b: Waiting
+62d5df8c29d0: Waiting
+cae2093fe144: Already exists
+a9986cd6f37d: Layer already exists
+44136fa355b3: Waiting
+e2f4a003057d: Waiting
+d4a23e25aa71: Waiting
+1930c2672538: Waiting
+e2f4a003057d: Waiting
+771ac484c12b: Layer already exists
+ff37fb80e803: Waiting
+64da2521a25d: Waiting
+62d5df8c29d0: Layer already exists
+f3781991ff1e: Waiting
+44136fa355b3: Already exists
+d4a23e25aa71: Layer already exists
+1930c2672538: Layer already exists
+e2f4a003057d: Layer already exists
+ff37fb80e803: Layer already exists
+64da2521a25d: Layer already exists
+f3781991ff1e: Layer already exists
+3.0.0: digest: sha256:6b56510e5e0609839e4d92165291b034d8d5af2018ad9a95e6f95243d5c19666 size: 856
++ docker logout
+Removing login credentials for https://index.docker.io/v1/
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy)
+[Pipeline] container
+[Pipeline] {
+[Pipeline] sh
++ cat /var/run/secrets/kubernetes.io/serviceaccount/token
++ TOKEN=eyJhbGciOiJSUzI1NiIsImtpZCI6ImQyb3JacXEwdGdSb3JOSnRfRy1renNzM2hjeDZRb0xTbk9LckR0ZXlOV0UifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxODIyNjE5MTQ5LCJpYXQiOjE3OTEwODMxNDksImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiMzYwMGI5YjEtMTBmOC00NjhjLWI0MjYtOTM0YjQwYzUxMmFmIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJqZW5raW5zIiwibm9kZSI6eyJuYW1lIjoiZG9ja2VyLWRlc2t0b3AiLCJ1aWQiOiJjZDBiNmY3Ny01OTVjLTQ4ZjAtYjFlNC1lOGJlNGExNzNlYTgifSwicG9kIjp7Im5hbWUiOiJsYWIzLWNhcm9sYS1yb21lcm8tMi13OHBxMC14MGdrci1mMno4ZiIsInVpZCI6Ijc3YzY4NzczLTE4ZDAtNDgwZC05OGVhLWJmZDRlNGIxYzY1YiJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiamVua2lucyIsInVpZCI6ImYxZDc2NDM3LTgyMWYtNDM2ZS05MTU3LTY4NzU1NmFkY2VkZiJ9LCJ3YXJuYWZ0ZXIiOjE3OTEwODY3NTZ9LCJuYmYiOjE3OTEwODMxNDksInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpqZW5raW5zOmplbmtpbnMifQ.NWEsVfhIGikHLcesA18QaTeLfgYYGHJpDs2IJVV-mPPLkktF9ONDXRgzV2euJ2stYNIVJVg0FEgDHafg5kIPFbxVP9an3MsqO5-bMwcju0MowhA9qpGkRxpHwQ53k4ZZRC0q3Sqq_pTg7aICTPL2n-dTw6s_7Sr1BUtljbZwCGzL4pZizXZVolEp6cOAizOIvfyO9twE4Zru7d09Jo-aTNL3K-F4rE1HofwUTOUT1XtsQ32Dq0gBexr55i1RTKBsE1reShWP2dStRDYw88s4_EbIMfCxeeAq04Y22xjBxJX-0xqC8pouLUmABqYcOXTH1D0Ukl5Frx_ENTRVfZvPzw
++ kubectl '--server=https://kubernetes.default.svc' '--certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt' '--token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImQyb3JacXEwdGdSb3JOSnRfRy1renNzM2hjeDZRb0xTbk9LckR0ZXlOV0UifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxODIyNjE5MTQ5LCJpYXQiOjE3OTEwODMxNDksImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiMzYwMGI5YjEtMTBmOC00NjhjLWI0MjYtOTM0YjQwYzUxMmFmIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJqZW5raW5zIiwibm9kZSI6eyJuYW1lIjoiZG9ja2VyLWRlc2t0b3AiLCJ1aWQiOiJjZDBiNmY3Ny01OTVjLTQ4ZjAtYjFlNC1lOGJlNGExNzNlYTgifSwicG9kIjp7Im5hbWUiOiJsYWIzLWNhcm9sYS1yb21lcm8tMi13OHBxMC14MGdrci1mMno4ZiIsInVpZCI6Ijc3YzY4NzczLTE4ZDAtNDgwZC05OGVhLWJmZDRlNGIxYzY1YiJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiamVua2lucyIsInVpZCI6ImYxZDc2NDM3LTgyMWYtNDM2ZS05MTU3LTY4NzU1NmFkY2VkZiJ9LCJ3YXJuYWZ0ZXIiOjE3OTEwODY3NTZ9LCJuYmYiOjE3OTEwODMxNDksInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpqZW5raW5zOmplbmtpbnMifQ.NWEsVfhIGikHLcesA18QaTeLfgYYGHJpDs2IJVV-mPPLkktF9ONDXRgzV2euJ2stYNIVJVg0FEgDHafg5kIPFbxVP9an3MsqO5-bMwcju0MowhA9qpGkRxpHwQ53k4ZZRC0q3Sqq_pTg7aICTPL2n-dTw6s_7Sr1BUtljbZwCGzL4pZizXZVolEp6cOAizOIvfyO9twE4Zru7d09Jo-aTNL3K-F4rE1HofwUTOUT1XtsQ32Dq0gBexr55i1RTKBsE1reShWP2dStRDYw88s4_EbIMfCxeeAq04Y22xjBxJX-0xqC8pouLUmABqYcOXTH1D0Ukl5Frx_ENTRVfZvPzw' apply -f entrega.yaml
+namespace/ns-carola-romero unchanged
+configmap/config-carola-romero unchanged
+secret/secret-carola-romero configured
+deployment.apps/app-carola-romero unchanged
+service/svc-carola-romero unchanged
++ kubectl '--server=https://kubernetes.default.svc' '--certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt' '--token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImQyb3JacXEwdGdSb3JOSnRfRy1renNzM2hjeDZRb0xTbk9LckR0ZXlOV0UifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxODIyNjE5MTQ5LCJpYXQiOjE3OTEwODMxNDksImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiMzYwMGI5YjEtMTBmOC00NjhjLWI0MjYtOTM0YjQwYzUxMmFmIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJqZW5raW5zIiwibm9kZSI6eyJuYW1lIjoiZG9ja2VyLWRlc2t0b3AiLCJ1aWQiOiJjZDBiNmY3Ny01OTVjLTQ4ZjAtYjFlNC1lOGJlNGExNzNlYTgifSwicG9kIjp7Im5hbWUiOiJsYWIzLWNhcm9sYS1yb21lcm8tMi13OHBxMC14MGdrci1mMno4ZiIsInVpZCI6Ijc3YzY4NzczLTE4ZDAtNDgwZC05OGVhLWJmZDRlNGIxYzY1YiJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiamVua2lucyIsInVpZCI6ImYxZDc2NDM3LTgyMWYtNDM2ZS05MTU3LTY4NzU1NmFkY2VkZiJ9LCJ3YXJuYWZ0ZXIiOjE3OTEwODY3NTZ9LCJuYmYiOjE3OTEwODMxNDksInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpqZW5raW5zOmplbmtpbnMifQ.NWEsVfhIGikHLcesA18QaTeLfgYYGHJpDs2IJVV-mPPLkktF9ONDXRgzV2euJ2stYNIVJVg0FEgDHafg5kIPFbxVP9an3MsqO5-bMwcju0MowhA9qpGkRxpHwQ53k4ZZRC0q3Sqq_pTg7aICTPL2n-dTw6s_7Sr1BUtljbZwCGzL4pZizXZVolEp6cOAizOIvfyO9twE4Zru7d09Jo-aTNL3K-F4rE1HofwUTOUT1XtsQ32Dq0gBexr55i1RTKBsE1reShWP2dStRDYw88s4_EbIMfCxeeAq04Y22xjBxJX-0xqC8pouLUmABqYcOXTH1D0Ukl5Frx_ENTRVfZvPzw' rollout restart deployment/app-carola-romero -n ns-carola-romero
+deployment.apps/app-carola-romero restarted
++ kubectl '--server=https://kubernetes.default.svc' '--certificate-authority=/var/run/secrets/kubernetes.io/serviceaccount/ca.crt' '--token=eyJhbGciOiJSUzI1NiIsImtpZCI6ImQyb3JacXEwdGdSb3JOSnRfRy1renNzM2hjeDZRb0xTbk9LckR0ZXlOV0UifQ.eyJhdWQiOlsiaHR0cHM6Ly9rdWJlcm5ldGVzLmRlZmF1bHQuc3ZjLmNsdXN0ZXIubG9jYWwiXSwiZXhwIjoxODIyNjE5MTQ5LCJpYXQiOjE3OTEwODMxNDksImlzcyI6Imh0dHBzOi8va3ViZXJuZXRlcy5kZWZhdWx0LnN2Yy5jbHVzdGVyLmxvY2FsIiwianRpIjoiMzYwMGI5YjEtMTBmOC00NjhjLWI0MjYtOTM0YjQwYzUxMmFmIiwia3ViZXJuZXRlcy5pbyI6eyJuYW1lc3BhY2UiOiJqZW5raW5zIiwibm9kZSI6eyJuYW1lIjoiZG9ja2VyLWRlc2t0b3AiLCJ1aWQiOiJjZDBiNmY3Ny01OTVjLTQ4ZjAtYjFlNC1lOGJlNGExNzNlYTgifSwicG9kIjp7Im5hbWUiOiJsYWIzLWNhcm9sYS1yb21lcm8tMi13OHBxMC14MGdrci1mMno4ZiIsInVpZCI6Ijc3YzY4NzczLTE4ZDAtNDgwZC05OGVhLWJmZDRlNGIxYzY1YiJ9LCJzZXJ2aWNlYWNjb3VudCI6eyJuYW1lIjoiamVua2lucyIsInVpZCI6ImYxZDc2NDM3LTgyMWYtNDM2ZS05MTU3LTY4NzU1NmFkY2VkZiJ9LCJ3YXJuYWZ0ZXIiOjE3OTEwODY3NTZ9LCJuYmYiOjE3OTEwODMxNDksInN1YiI6InN5c3RlbTpzZXJ2aWNlYWNjb3VudDpqZW5raW5zOmplbmtpbnMifQ.NWEsVfhIGikHLcesA18QaTeLfgYYGHJpDs2IJVV-mPPLkktF9ONDXRgzV2euJ2stYNIVJVg0FEgDHafg5kIPFbxVP9an3MsqO5-bMwcju0MowhA9qpGkRxpHwQ53k4ZZRC0q3Sqq_pTg7aICTPL2n-dTw6s_7Sr1BUtljbZwCGzL4pZizXZVolEp6cOAizOIvfyO9twE4Zru7d09Jo-aTNL3K-F4rE1HofwUTOUT1XtsQ32Dq0gBexr55i1RTKBsE1reShWP2dStRDYw88s4_EbIMfCxeeAq04Y22xjBxJX-0xqC8pouLUmABqYcOXTH1D0Ukl5Frx_ENTRVfZvPzw' rollout status deployment/app-carola-romero -n ns-carola-romero '--timeout=120s'
+Waiting for deployment "app-carola-romero" rollout to finish: 0 out of 2 new replicas have been updated...
+Waiting for deployment "app-carola-romero" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "app-carola-romero" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "app-carola-romero" rollout to finish: 1 out of 2 new replicas have been updated...
+Waiting for deployment "app-carola-romero" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "app-carola-romero" rollout to finish: 1 old replicas are pending termination...
+Waiting for deployment "app-carola-romero" rollout to finish: 1 old replicas are pending termination...
+deployment "app-carola-romero" successfully rolled out
+[Pipeline] }
+[Pipeline] // container
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] }
+[Pipeline] // podTemplate
+[Pipeline] End of Pipeline
+Finished: SUCCESS
