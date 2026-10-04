@@ -30,9 +30,7 @@ spec:
         - --host=unix:///var/run/docker.sock
 
     - name: kubectl
-      image: bitnami/kubectl:latest
+      image: alpine/k8s:1.36.1
       command:
-        - /bin/sh
-        - -c
         - cat
       tty: true
